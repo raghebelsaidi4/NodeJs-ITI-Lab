@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Welcome to the Product App</h1>
+<button id="display">Display Products</button>
+<button id="insert">Insert Product</button>
+
+<div id="output" style="margin-top: 20px;"></div>
+
+<script>
+    // Display products
+    $("#display").on("click", () => {
+        $.ajax({
+            url: "/listproducts",
+            method: "GET",
+            success: (products) => {
+                let output = "<h3>Product List</h3><ul>";
+                products.forEach((product) => {
+                    output += `<li>
+              <strong>Name:</strong> ${product.Name},
+              <strong>Price:</strong> ${product.Price},
+              <strong>Quantity:</strong> ${product.Quantity},
+              <strong>ImgURL:</strong> <a href="${product.ImgURL}" target="_blank">View Image</a>
+            </li>`;
+                });
+                output += "</ul>";
+                $("#output").html(output);
+            },
+            error: (err) => {
+                console.error("Error fetching products:", err);
+            },
+        });
+    });
+
+    // Insert product
+    $("#insert").on("click", () => {
+        const product = {
+            Name: prompt("Enter Product Name:"),
+            Price: parseFloat(prompt("Enter Product Price:")),
+            Quantity: parseInt(prompt("Enter Product Quantity:"), 10),
+            ImgURL: prompt("Enter Product Image URL:"),
+        };
+
+        $.ajax({
+            url: "/insert",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(product),
+            success: (response) => {
+                alert(response);
+            },
+            error: (err) => {
+                console.error("Error inserting product:", err);
+            },
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Items</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<h1>Buy Items</h1>
+<button id="buyButton">Buy</button>
+<h2>Remaining Items: <span id="itemsCount">Loading...</span></h2>
+
+<script>
+    const socket = io(); // Connect to the server
+
+    // Listen for CountChanged event
+    socket.on("CountChanged", (count) => {
+        document.getElementById("itemsCount").textContent = count;
+    });
+
+    // Handle Buy button click
+    document.getElementById("buyButton").addEventListener("click", () => {
+        fetch("/buy", { method: "POST" })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Purchase successful!");
+                } else {
+                    alert("No items left to buy.");
+                }
+            })
+            .catch((error) => console.error("Error:", error));
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Remaining Items</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<h1>Remaining Items</h1>
+<h2>Remaining Items Count: <span id="itemsCount">Loading...</span></h2>
+
+<script>
+  const socket = io(); // Connect to the server
+
+  // Listen for CountChanged event
+  socket.on("CountChanged", (count) => {
+    document.getElementById("itemsCount").textContent = count;
+  });
+</script>
+</body>
+</html>

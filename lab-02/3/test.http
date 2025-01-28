@@ -1,0 +1,11 @@
+### GET request to example server
+GET http://localhost:3000/welcome-form
+###
+
+###
+GET http://localhost:3000/login-form
+###
+
+###
+GET http://localhost:3000/products/01
+###

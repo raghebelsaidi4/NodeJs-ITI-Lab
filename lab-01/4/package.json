@@ -1,0 +1,15 @@
+{
+  "name": "4",
+  "version": "1.0.0",
+  "description": "NPM (Node Package Manager) is a tool that helps developers manage libraries, frameworks, and dependencies for Node.js applications. It allows you to:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.12.0"
+  }
+}
